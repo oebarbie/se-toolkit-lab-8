@@ -1,50 +1,22 @@
-# Lab 8 — Report
-
-Paste your checkpoint evidence below. Add screenshots as image files in the repo and reference them with `![description](path)`.
-
 ## Task 1A — Bare agent
 
-<!-- Paste the agent's response to "What is the agentic loop?" and "What labs are available in our LMS?" -->
+### What is the agentic loop?
 
-## Task 1B — Agent with LMS tools
+The agentic loop is the fundamental cycle that autonomous AI agents follow to accomplish tasks.
+It typically consists of these core stages:
 
-<!-- Paste the agent's response to "What labs are available?" and "Describe the architecture of the LMS system" -->
+1. Perceive — Gather information from the environment (user input, tool outputs, files, APIs, etc.)
+2. Think/Reason — Process the information, plan next steps, make decisions about what actions to take
+3. Act — Execute actions using available tools (file operations, API calls, code execution, web searches, etc.)
+4. Observe — Receive feedback from the actions taken (success, errors, new data)
+5. Repeat — Continue the loop until the goal is achieved or a stopping condition is met
+
+### What labs are available in our LMS?
+
+The agent explored workspace files and listed lab task descriptions from local files instead of querying the real LMS backend — it has no tools yet, so it cannot access real data.
 
 ## Task 1C — Skill prompt
 
-<!-- Paste the agent's response to "Show me the scores" (without specifying a lab) -->
+### Show me the scores (without specifying a lab)
 
-## Task 2A — Deployed agent
-
-<!-- Paste a short nanobot startup log excerpt showing the gateway started inside Docker -->
-
-## Task 2B — Web client
-
-<!-- Screenshot of a conversation with the agent in the Flutter web app -->
-
-## Task 3A — Structured logging
-
-<!-- Paste happy-path and error-path log excerpts, VictoriaLogs query screenshot -->
-
-## Task 3B — Traces
-
-<!-- Screenshots: healthy trace span hierarchy, error trace -->
-
-## Task 3C — Observability MCP tools
-
-<!-- Paste agent responses to "any errors in the last hour?" under normal and failure conditions -->
-
-## Task 4A — Multi-step investigation
-
-<!-- Paste the agent's response to "What went wrong?" showing chained log + trace investigation -->
-
-## Task 4B — Proactive health check
-
-<!-- Screenshot or transcript of the proactive health report that appears in the Flutter chat -->
-
-## Task 4C — Bug fix and recovery
-
-<!-- 1. Root cause identified
-     2. Code fix (diff or description)
-     3. Post-fix response to "What went wrong?" showing the real underlying failure
-     4. Healthy follow-up report or transcript after recovery -->
+The agent listed all available labs with their scores and asked at the end: "Would you like details on a specific lab?" — demonstrating awareness that a lab parameter may be needed for deeper queries.
