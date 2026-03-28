@@ -92,3 +92,24 @@ The agent found and analyzed all errors:
 - Agent correctly identified the root cause and recommended actions
 
 Both responses demonstrate the agent can query VictoriaLogs and summarize findings.
+
+## Task 4A — Multi-step investigation
+
+With PostgreSQL stopped, the agent investigated and found:
+- Primary issue: Database connectivity failure (DNS resolution - postgres stopped)
+- 10+ consecutive db_query errors from Learning Management Service
+- Agent chained logs_error_count → logs_search → traces_get automatically
+- Correctly identified root cause and recommended actions
+
+## Task 4B — Proactive health check
+
+Agent set up heartbeat-based health monitoring via HEARTBEAT.md.
+
+First check (healthy): 0 errors detected, system looks healthy.
+
+Proactive report after failure (23:18 UTC):
+- Status: UNHEALTHY
+- Error count (last 2 min): 1 ERROR in LMS
+- Root cause: Database connectivity failure [Errno -2] Name or service not known
+- Trace ID: 92a4e5ff346807200ea06d4883da66c7
+- Agent correctly diagnosed and reported without being asked
