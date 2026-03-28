@@ -13,5 +13,5 @@ COPY . .
 RUN pnpm run build
 
 # Stage 2: Copy build output
-FROM alpine
+FROM harbor.pg.innopolis.university/docker-hub-cache/library/alpine
 COPY --from=builder /app/dist /output/

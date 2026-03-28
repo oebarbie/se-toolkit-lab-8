@@ -7,7 +7,9 @@ requires-python = "==3.14.*"
 dependencies = [
     "mcp-lms",
     "nanobot-ai>=0.1.4.post6",
+    "nanobot-webchat",
 ]
 
 [tool.uv.sources]
 mcp-lms = { workspace = true, editable = true }
+nanobot-webchat = { workspace = true, editable = true }
