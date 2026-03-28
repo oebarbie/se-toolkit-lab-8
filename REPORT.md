@@ -46,3 +46,49 @@ The agent returned real lab data from the LMS backend:
 - Lab 06 — Build Your Own Agent
 - Lab 07 — Build a Client with an AI Coding Agent
 - lab-08
+
+## Task 3A — Structured logging
+
+### Happy-path log excerpt
+
+2026-03-28 21:00:50,420 INFO [lms_backend.main] - request_started [trace_id=52fb3e5194f3fab407e824db7372a2a7]
+2026-03-28 21:00:50,421 INFO [lms_backend.auth] - auth_success [trace_id=52fb3e5194f3fab407e824db7372a2a7]
+2026-03-28 21:00:50,422 INFO [lms_backend.db.items] - db_query [trace_id=52fb3e5194f3fab407e824db7372a2a7]
+2026-03-28 21:00:50,537 INFO [lms_backend.main] - request_completed [trace_id=52fb3e5194f3fab407e824db7372a2a7]
+GET /items/ 200 OK
+
+
+
+### Error-path log excerpt (postgres stopped)
+
+2026-03-28 21:13:25,824 INFO [lms_backend.main] - request_started [trace_id=739354c750a0275a3a0051601f36bdf6]
+2026-03-28 21:13:25,825 INFO [lms_backend.auth] - auth_success [trace_id=739354c750a0275a3a0051601f36bdf6]
+2026-03-28 21:13:25,825 INFO [lms_backend.db.items] - db_query [trace_id=739354c750a0275a3a0051601f36bdf6]
+2026-03-28 21:13:26,570 ERROR [lms_backend.db.items] - db_query [trace_id=739354c750a0275a3a0051601f36bdf6]
+2026-03-28 21:13:26,570 WARNING [lms_backend.routers.items] - items_list_failed_as_not_found
+2026-03-28 21:13:26,816 INFO [lms_backend.main] - request_completed [trace_id=739354c750a0275a3a0051601f36bdf6]
+GET /items/ 404 Not Found
+
+
+
+### VictoriaLogs screenshot
+[screenshot added]
+
+## Task 3B — Traces
+[screenshots added]
+
+## Task 3C — Observability MCP tools
+
+### Normal conditions: Any errors in the last hour?
+
+"There are 13 ERROR log entries across all services in the last 1 hour."
+
+### Error details after postgres was stopped:
+
+The agent found and analyzed all errors:
+- Primary issue: Database connection failures (DNS resolution failure - postgres stopped)
+- Secondary issue: Unique constraint violation from earlier ETL sync
+- All errors from Learning Management Service
+- Agent correctly identified the root cause and recommended actions
+
+Both responses demonstrate the agent can query VictoriaLogs and summarize findings.

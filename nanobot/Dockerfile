@@ -8,6 +8,7 @@ WORKDIR /app
 COPY --from=workspace pyproject.toml uv.lock /app/
 COPY pyproject.toml /app/nanobot/pyproject.toml
 COPY --from=workspace mcp/mcp-lms /app/mcp/mcp-lms
+COPY --from=workspace mcp/mcp-obs /app/mcp/mcp-obs
 COPY --from=workspace nanobot-websocket-channel/nanobot-webchat /app/nanobot-websocket-channel/nanobot-webchat
 COPY --from=workspace nanobot-websocket-channel/nanobot-channel-protocol /app/nanobot-websocket-channel/nanobot-channel-protocol
 
@@ -21,6 +22,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 RUN uv pip install --python /app/.venv/bin/python --no-deps /app/nanobot-websocket-channel/nanobot-channel-protocol
 RUN uv pip install --python /app/.venv/bin/python --no-deps /app/nanobot-websocket-channel/nanobot-webchat
+RUN uv pip install --python /app/.venv/bin/python /app/mcp/mcp-obs
 
 ARG REGISTRY_PREFIX_DOCKER_HUB
 FROM ${REGISTRY_PREFIX_DOCKER_HUB}python:3.14.2-slim-bookworm
